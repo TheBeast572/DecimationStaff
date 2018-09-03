@@ -1,0 +1,10 @@
+main: net.mcdecimation.decimationstaff.Main
+name: DecimationStaff
+description: Official Decimation Plugin
+version: 1.0
+commands:
+  decirules:
+    description: Opens up custom GUI
+permissions:
+  decistaff.rules.allow:
+    description: Allows User To Open GUI
