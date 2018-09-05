@@ -1,7 +1,9 @@
 package net.mcdecimation.decimationstaff.handlers.punishments;
 
-import net.mcdecimation.decimationstaff.commands.RulesCommand;
-import net.mcdecimation.decimationstaff.handlers.rulesGUI;
+import net.mcdecimation.decimationstaff.commands.helpCommand;
+import net.mcdecimation.decimationstaff.commands.punishCommand;
+import net.mcdecimation.decimationstaff.files.playerbansFile;
+import net.mcdecimation.decimationstaff.handlers.punishGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.ConsoleCommandSender;
@@ -16,12 +18,12 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 
 public class aP implements Listener {
-    rulesGUI rulesGUI = new rulesGUI();
+    punishGUI punishGUI = new punishGUI();
 
     @EventHandler
     public void onClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        if(event.getCurrentItem().equals(rulesGUI.advertising())) {
+        if(event.getCurrentItem().equals(punishGUI.advertising())) {
             event.setCancelled(true);
             player.openInventory(openGUI());
 
@@ -29,15 +31,17 @@ public class aP implements Listener {
             event.setCancelled(true);
             ConsoleCommandSender sender = Bukkit.getServer().getConsoleSender();
 
-            Bukkit.dispatchCommand(sender, "/ban " + RulesCommand.tname.get(player.getUniqueId()) + " 1w1s" + " Advertising");
-            RulesCommand.tname.remove(player.getUniqueId());
+            Bukkit.dispatchCommand(sender, "/ban " + punishCommand.tname.get(player.getUniqueId()) + " 1w1s" + " Advertising");
+            playerbansFile.createFile(punishCommand.tname.get(player.getUniqueId()), player.getName(), "Advertising", "1st Offense");
+            punishCommand.tname.remove(player.getUniqueId());
 
         } else if(event.getCurrentItem().equals(offense2())) {
             event.setCancelled(true);
             ConsoleCommandSender sender = Bukkit.getServer().getConsoleSender();
 
-            Bukkit.dispatchCommand(sender, "/mute " + RulesCommand.tname.get(player.getUniqueId()) + " Advertising");
-            RulesCommand.tname.remove(player.getUniqueId());
+            Bukkit.dispatchCommand(sender, "/mute " + punishCommand.tname.get(player.getUniqueId()) + " Advertising");
+            playerbansFile.createFile(punishCommand.tname.get(player.getUniqueId()), player.getName(), "Advertising", "2nd Offense");
+            punishCommand.tname.remove(player.getUniqueId());
         }
     }
 

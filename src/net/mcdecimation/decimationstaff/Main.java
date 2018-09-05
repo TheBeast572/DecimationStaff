@@ -1,6 +1,8 @@
 package net.mcdecimation.decimationstaff;
 
-import net.mcdecimation.decimationstaff.commands.RulesCommand;
+import net.mcdecimation.decimationstaff.commands.helpCommand;
+import net.mcdecimation.decimationstaff.commands.punishCommand;
+import net.mcdecimation.decimationstaff.files.configFile;
 import net.mcdecimation.decimationstaff.handlers.punishments.aP;
 import net.mcdecimation.decimationstaff.handlers.punishments.fnP;
 import net.mcdecimation.decimationstaff.handlers.punishments.hP;
@@ -14,6 +16,9 @@ public class Main extends JavaPlugin {
     static Plugin plugin;
 
     public void onEnable() {
+        configFile configFile = new configFile();
+
+        configFile.reload();
         registerEvents();
         registerCommands();
         plugin = this;
@@ -23,7 +28,7 @@ public class Main extends JavaPlugin {
         plugin = null;
     }
 
-    public Plugin getPlugin() {
+    public static Plugin getPlugin() {
         return plugin;
     }
 
@@ -37,6 +42,7 @@ public class Main extends JavaPlugin {
     }
 
     public void registerCommands() {
-        this.getCommand("decirules").setExecutor(new RulesCommand());
+        this.getCommand("help").setExecutor(new helpCommand());
+        this.getCommand("punish").setExecutor(new punishCommand());
     }
 }

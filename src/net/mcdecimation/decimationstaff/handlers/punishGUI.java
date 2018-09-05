@@ -8,9 +8,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class rulesGUI {
+public class punishGUI {
 
-    public rulesGUI() {
+    public punishGUI() {
         this.openGUI();
         this.f3plusb();
         this.hacking();

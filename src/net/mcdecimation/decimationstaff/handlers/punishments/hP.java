@@ -1,7 +1,9 @@
 package net.mcdecimation.decimationstaff.handlers.punishments;
 
-import net.mcdecimation.decimationstaff.commands.RulesCommand;
-import net.mcdecimation.decimationstaff.handlers.rulesGUI;
+import net.mcdecimation.decimationstaff.commands.helpCommand;
+import net.mcdecimation.decimationstaff.commands.punishCommand;
+import net.mcdecimation.decimationstaff.files.playerbansFile;
+import net.mcdecimation.decimationstaff.handlers.punishGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.ConsoleCommandSender;
@@ -16,13 +18,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 
 public class hP implements Listener {
-    rulesGUI rulesGUI = new rulesGUI();
+    punishGUI punishGUI = new punishGUI();
 
     @EventHandler
     public void onClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
 
-        if(event.getCurrentItem().equals(rulesGUI.hacking())) {
+        if(event.getCurrentItem().equals(punishGUI.hacking())) {
             event.setCancelled(true);
             player.openInventory(openGUI());
 
@@ -30,15 +32,17 @@ public class hP implements Listener {
             event.setCancelled(true);
             ConsoleCommandSender sender = Bukkit.getServer().getConsoleSender();
 
-            Bukkit.dispatchCommand(sender, "/ban " + RulesCommand.tname.get(player.getUniqueId()) + " 1mo1s" + " Hacking");
-            RulesCommand.tname.remove(player.getUniqueId());
+            Bukkit.dispatchCommand(sender, "/ban " + punishCommand.tname.get(player.getUniqueId()) + " 1mo1s" + " Hacking");
+            playerbansFile.createFile(punishCommand.tname.get(player.getUniqueId()), player.getName(), "Hacking", "1st Offense");
+            punishCommand.tname.remove(player.getUniqueId());
 
         } else if(event.getCurrentItem().equals(offense2())) {
             event.setCancelled(true);
             ConsoleCommandSender sender = Bukkit.getServer().getConsoleSender();
 
-            Bukkit.dispatchCommand(sender, "/ban " + RulesCommand.tname.get(player.getUniqueId()) + " 5y1s" + " Hacking");
-            RulesCommand.tname.remove(player.getUniqueId());
+            Bukkit.dispatchCommand(sender, "/ban " + punishCommand.tname.get(player.getUniqueId()) + " 5y1s" + " Hacking");
+            playerbansFile.createFile(punishCommand.tname.get(player.getUniqueId()), player.getName(), "Hacking", "2nd Offense");
+            punishCommand.tname.remove(player.getUniqueId());
         }
     }
 
