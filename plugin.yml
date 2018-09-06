@@ -2,14 +2,9 @@ main: net.mcdecimation.decimationstaff.Main
 name: DecimationStaff
 description: Official Decimation Plugin
 version: 1.0
-authors:
--TheBeast572
--André
+authors: [TheBeast572, André]
 commands:
-  decirules:
-    description: Opens up custom GUI
+  punish:
+    description: Easier way to punish players!
   help:
-    usage: <command> [Arguments]
-permissions:
-  decistaff.rules.allow:
-    description: Allows User To Open GUI
+    description: Lists all decimation specific commands!

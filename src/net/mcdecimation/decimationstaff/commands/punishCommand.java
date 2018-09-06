@@ -17,15 +17,15 @@ public class punishCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandlabel, String[] args) {
         if(!(sender instanceof Player)) return false;
-        Player player = (Player) sender;
         configFile configFile = new configFile();
-        String perms = configFile.ymlConfig().get("rulesGUIpermission").toString();
+        Player player = (Player) sender;
+        String perms = configFile.getConfigFile().get("rulesGUIpermission").toString();
 
         punishGUI punishGUI = new punishGUI();
 
         if(commandlabel.equalsIgnoreCase("punish") && player.hasPermission(perms)) {
-            if(args.length == 0) {
-               Player target = (Player) Bukkit.getPlayerExact(args[0]);
+            if(args.length == 1) {
+               Player target = Bukkit.getPlayerExact(args[0]);
                if(target != null) {
                    tname.put(player.getUniqueId(), target.getName());
                    player.openInventory(punishGUI.openGUI());
@@ -34,9 +34,9 @@ public class punishCommand implements CommandExecutor {
                    player.sendMessage(" ");
                    player.sendMessage(" ");
                    player.sendMessage(" ");
-                   player.sendMessage("§7§m----§r §Error §7§m----§r");
+                   player.sendMessage("§7§m----§r §cError §7§m----§r");
                    player.sendMessage(" ");
-                   player.sendMessage("§7- §c§l§o" + configFile.ymlConfig().get("playernotfoundmessage"));
+                   player.sendMessage("§7- §c§l§o" + configFile.getConfigFile().get("playernotfoundmessage"));
                    player.sendMessage(" ");
                    player.sendMessage("§7§m-------------------------");
                    player.sendMessage(" ");
@@ -44,7 +44,7 @@ public class punishCommand implements CommandExecutor {
                    player.sendMessage(" ");
                    return false;
                }
-            } else {
+            } else if (args.length == 0) {
                 player.sendMessage(" ");
                 player.sendMessage(" ");
                 player.sendMessage(" ");

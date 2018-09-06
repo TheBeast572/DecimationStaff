@@ -19,7 +19,7 @@ public class punishGUI {
     }
 
     public Inventory openGUI() {
-        Inventory inv = Bukkit.createInventory(null, 9, "§c§lDecimation Rules GUI");
+        Inventory inv = Bukkit.createInventory(null, 9, "§c§lDecimation Punish GUI");
 
         inv.setItem(0, f3plusb());
         inv.setItem(1, hacking());

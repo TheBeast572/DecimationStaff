@@ -21,10 +21,15 @@ public class Main extends JavaPlugin {
         configFile.reload();
         registerEvents();
         registerCommands();
+
         plugin = this;
     }
 
     public void onDisable() {
+        configFile configFile = new configFile();
+
+        configFile.reload();
+
         plugin = null;
     }
 

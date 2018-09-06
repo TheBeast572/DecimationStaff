@@ -17,7 +17,7 @@ public class playerbansFile {
         File file = getbansFile(playername);
         YamlConfiguration data = YamlConfiguration.loadConfiguration(file);
 
-        if(data.getBoolean("has-been-punished-before") != true) {
+        if(file.exists()) {
             data.set("punished-by", getwhopunished);
             data.set("punishment", punishment);
             data.set("offense", offense);

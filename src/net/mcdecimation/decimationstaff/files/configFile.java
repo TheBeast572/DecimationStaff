@@ -8,55 +8,37 @@ import java.io.IOException;
 
 public class configFile {
 
+    public File file = new File(Main.getPlugin(Main.class).getDataFolder(), "config.yml");
+    public YamlConfiguration data = YamlConfiguration.loadConfiguration(file);
+
     public configFile() {
-        this.getConfigFile();
         this.reload();
-        this.ymlConfig();
-    }
-
-    public File getConfigFile() {
-        File file = new File(Main.getPlugin(Main.class).getDataFolder(), "config.yml");
-        return file;
-    }
-
-    public YamlConfiguration ymlConfig() {
-        YamlConfiguration config = YamlConfiguration.loadConfiguration(getConfigFile());
-        return config;
+        this.getConfigFile();
     }
 
     public void reload() {
+        if(!(file.exists())) {
+            data.set("subCommand1title", "§cDecimation Help");
+            data.set("subCommand1line1", "§7Line 1");
+            data.set("subCommand1line2", "§7Line 2");
 
-        if(!Main.getPlugin().getDataFolder().exists()) {
-            Main.getPlugin().getDataFolder().mkdir();
-        }
-
-        if(!getConfigFile().exists()) {
+            data.set("subCommand2title", "§cDiscord Help");
+            data.set("subCommand2line1", "§7Line 1");
+            data.set("subCommand2line2", "§7Line 2");
+            data.set("reloadsubCommand", "reload");
+            data.set("reloadPermission", "decimationstaff.help.reload");
+            data.set("reloadOutputSuccess", "§7Decimation Help config §a§osuccessfully§7 reloaded");
+            data.set("rulesGUIpermission", "decimationstaff.rules.allow");
+            data.set("playernotfoundmessage", "§cThat player does not exist!");
             try {
-                getConfigFile().createNewFile();
-                YamlConfiguration config = YamlConfiguration.loadConfiguration(getConfigFile());
-                config.addDefault("subCommand1", true);
-                config.addDefault("subCommand2", true);
-                config.addDefault("subCommand1info", true);
-                config.addDefault("subCommand2info", true);
-                config.addDefault("subCommand1title", true);
-                config.addDefault("subCommand1line1", true);
-                config.addDefault("subCommand1line2", true);
-                config.addDefault("subCommand2title", true);
-                config.addDefault("subCommand2line1", true);
-                config.addDefault("subCommand2line2", true);
-                config.addDefault("reloadsubCommand", true);
-                config.addDefault("reloadPermission", true);
-                config.addDefault("reloadOutputSuccess", true);
-                config.addDefault("rulesGUIpermission", true);
-            }
-            catch (IOException e) {
+                data.save(file);
+            } catch(IOException e) {
                 e.printStackTrace();
-
             }
-
-
         }
     }
 
-
+    public YamlConfiguration getConfigFile() {
+        return data;
+    }
 }
